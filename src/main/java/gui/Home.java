@@ -5,8 +5,13 @@
  */
 package gui;
 
+import dao.AluguelDB;
 import dao.ClienteDB;
 import java.util.ArrayList;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import models.Aluguel;
 import models.Cliente;
 
 /**
@@ -20,6 +25,7 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
+        carregaTabela();
 
     }
 
@@ -38,6 +44,9 @@ public class Home extends javax.swing.JFrame {
         jMenuBar3 = new javax.swing.JMenuBar();
         jMenu6 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbAlugueis = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuNovoCliente = new javax.swing.JMenuItem();
@@ -71,6 +80,57 @@ public class Home extends javax.swing.JFrame {
         jMenuBar3.add(jMenu7);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Alugueis vencidos"));
+
+        tbAlugueis.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Cod", "Aluguel", "Valor", "Devolução", "Nome", "CPF", "Telefone", "Modelo", "Placa", "Ano"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbAlugueis);
+        if (tbAlugueis.getColumnModel().getColumnCount() > 0) {
+            tbAlugueis.getColumnModel().getColumn(0).setMinWidth(50);
+            tbAlugueis.getColumnModel().getColumn(0).setMaxWidth(50);
+        }
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1028, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         jMenu1.setText("Clientes");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -219,16 +279,72 @@ public class Home extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 555, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 319, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void carregaTabela(){
+        
+        DefaultTableModel modelo = (DefaultTableModel) tbAlugueis.getModel();
+        modelo.setNumRows(0);
+       
+        DefaultTableCellRenderer esquerda = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer direita = new DefaultTableCellRenderer();
+        
+        esquerda.setHorizontalAlignment(SwingConstants.LEFT);
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+        direita.setHorizontalAlignment(SwingConstants.RIGHT);
+        
+        
+        tbAlugueis.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+        tbAlugueis.getColumnModel().getColumn(1).setCellRenderer(centralizado);
+        tbAlugueis.getColumnModel().getColumn(2).setCellRenderer(centralizado);
+        tbAlugueis.getColumnModel().getColumn(3).setCellRenderer(centralizado);
+        tbAlugueis.getColumnModel().getColumn(4).setCellRenderer(centralizado);
+        tbAlugueis.getColumnModel().getColumn(5).setCellRenderer(centralizado);
+        tbAlugueis.getColumnModel().getColumn(6).setCellRenderer(centralizado);
+        tbAlugueis.getColumnModel().getColumn(7).setCellRenderer(centralizado);
+        tbAlugueis.getColumnModel().getColumn(8).setCellRenderer(centralizado);
+        tbAlugueis.getColumnModel().getColumn(9).setCellRenderer(centralizado);
+        
+        AluguelDB alugueldb = new AluguelDB();
+        ArrayList<Aluguel> alugueis = alugueldb.listarAlugueisVencidos();
+        
+        if (alugueis != null){
+            for (Aluguel a : alugueis){
+                modelo.addRow(new Object[]{
+                
+                    a.getIdAluguel(),
+                    a.getDtAluguel(),
+                    a.getValor(),
+                    a.getDtDevolucao(),
+                    a.getNome(),
+                    a.getCPF(),
+                    a.getTelefone(),
+                    a.getModelo(),
+                    a.getPlaca(),
+                    a.getAno()
+//                    a.getIsActive()
+                
+                });
+            }
+        }
+
+    }
+    
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
         // TODO add your handling code here:
         
@@ -421,6 +537,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem menuClientes;
     private javax.swing.JMenuItem menuClientesInativos;
     private javax.swing.JMenuItem menuNovoCliente;
@@ -431,5 +549,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuVeiculos;
     private javax.swing.JMenuItem menuVeiculosAtivos;
     private javax.swing.JMenuItem menuVeiculosInativos;
+    private javax.swing.JTable tbAlugueis;
     // End of variables declaration//GEN-END:variables
 }

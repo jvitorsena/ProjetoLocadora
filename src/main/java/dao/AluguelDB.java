@@ -181,6 +181,59 @@ public class AluguelDB {
         return null;
     }
     
+    public ArrayList<Aluguel> listarAlugueisVencidos() {
+        ArrayList<Aluguel> alugueis = new ArrayList<Aluguel>();
+        
+        try {
+            this.conn = conexao.conectar();
+//            ps = conn.prepareStatement("select aluguel.DtAluguel, aluguel.Valor, aluguel.DtDevolucao, cliente.Nome, cliente.CPF, cliente.Telefone, veiculo.Modelo, veiculo.Placa, veiculo.Ano from aluguel INNER JOIN cliente ON (aluguel.idCliente = cliente.idCliente) INNER JOIN veiculo ON (aluguel.idVeiculo = veiculo.idVeiculo);");
+            ps = conn.prepareStatement(""
+                                     + "select"
+                                            + " 	Date_format(aluguel.DtDevolucao,'%d/%m/%y') as DtDevolucao, date_format(aluguel.DtAluguel,'%d/%m/%y') as DtAluguel, aluguel.Valor, cliente.Nome, cliente.CPF, cliente.Telefone, cliente.idCliente, veiculo.idVeiculo, veiculo.Modelo, veiculo.Placa, veiculo.Ano, aluguel.IsActive, aluguel.idAluguel"
+                                    + " from"
+                                        + " aluguel"
+                                      + " INNER JOIN cliente ON (aluguel.idCliente = cliente.idCliente)"
+                                     + " INNER JOIN veiculo ON (aluguel.idVeiculo = veiculo.idVeiculo) "
+                                    + "where"
+                                    + " aluguel.IsActive=1 and DtDevolucao < NOW();"
+            );
+            rs = ps.executeQuery();
+            
+            ArrayList<Aluguel> lista = new ArrayList<Aluguel>();
+            
+                while(rs.next()) {
+                Cliente c = new Cliente();
+                Veiculo v = new Veiculo();
+                Aluguel a = new Aluguel();
+                
+                a.setDtAluguel(rs.getString("DtAluguel"));
+                a.setValor(rs.getFloat("Valor"));
+                a.setDtDevolucao(rs.getString("DtDevolucao"));
+                a.setNome(rs.getString("Nome"));
+                a.setCPF(rs.getString("CPF"));
+                a.setTelefone(rs.getString("Telefone"));
+                a.setModelo(rs.getString("Modelo"));
+                a.setPlaca(rs.getString("Placa"));
+                a.setAno(rs.getInt("Ano"));
+                a.setIsActive(rs.getBoolean("IsActive"));
+                a.setIdAluguel(rs.getInt("idAluguel"));
+                a.setIdCliente(rs.getInt("idCliente"));
+                a.setIdVeiculo(rs.getByte("idVeiculo"));
+
+                lista.add(a);
+                
+            }
+            ps.close();
+            return lista;
+            
+        }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conexao.desconectar();
+        }
+        
+        return null;
+    }
     
     
     public boolean realizarAluguel(Cliente c, Veiculo v, Aluguel a){
