@@ -402,6 +402,7 @@ public class Home extends javax.swing.JFrame {
         VeiculosDisponiveis v = new VeiculosDisponiveis();
         v.setLocationRelativeTo(null);
         v.setVisible(true);
+        v.setTitle("Veiculos disponíveis");
         this.dispose();
     }//GEN-LAST:event_menuVeiculosActionPerformed
 
@@ -472,7 +473,7 @@ public class Home extends javax.swing.JFrame {
         AluguelListarTodos a = new AluguelListarTodos();
         a.setLocationRelativeTo(null);
         a.setVisible(true);
-        a.setTitle("Litagem de todos os alugueis");
+        a.setTitle("Listagem de todos os alugueis");
         this.dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 

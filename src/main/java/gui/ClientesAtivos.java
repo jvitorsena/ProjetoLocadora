@@ -343,12 +343,13 @@ public class ClientesAtivos extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEditar)
-                    .addComponent(btnDesativar)
-                    .addComponent(btnSalvar)
-                    .addComponent(btnLimpar)
-                    .addComponent(btnVoltar))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnDesativar)
+                        .addComponent(btnSalvar)
+                        .addComponent(btnLimpar)
+                        .addComponent(btnVoltar)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -433,7 +434,7 @@ public class ClientesAtivos extends javax.swing.JFrame {
 
             int index = tbClientes.getSelectedRow(); // retorna a linha selecionada
 
-            c = cdb.readAll().get(index);
+            c = cdb.listarClientesAtivos().get(index);
 
             c.setNome(txtNome.getText());
             c.setCPF(txtCPF.getText());

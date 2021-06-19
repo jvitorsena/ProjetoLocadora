@@ -22,46 +22,6 @@ public class VeiculoDB {
     private ResultSet rs;
     private PreparedStatement ps;
     
-    public ArrayList<Veiculo> readAll(){
-        ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
-        
-        try {
-            this.conn = conexao.conectar();
-            ps = conn.prepareStatement("select * from veiculo");
-            rs = ps.executeQuery();
-            
-            ArrayList<Veiculo> lista = new ArrayList<Veiculo>();
-            
-            while (rs.next()) {
-                Veiculo v = new Veiculo();
-                v.setIdVeiculo(rs.getInt("idVeiculo"));
-                v.setModelo(rs.getString("Modelo"));
-                v.setCor(rs.getString("Cor"));
-                v.setPlaca(rs.getString("Placa"));
-                v.setDescricao(rs.getString("Descricao"));
-                v.setChassi(rs.getString("Chassi"));
-                v.setFabricante(rs.getString("Fabricante"));
-                v.setAno(rs.getInt("Ano"));
-                v.setIsActive(rs.getBoolean("IsActive"));
-                v.setDisponibilidade(rs.getBoolean("Disponibilidade"));
-                
-                lista.add(v);
-                
-            }
-            
-            ps.close();
-            return lista;
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            conexao.desconectar();
-        }
-        
-        return null;
-        
-    }
-    
     public ArrayList<Veiculo> listarVeiculosAtivos(){
         ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
         
@@ -281,29 +241,6 @@ public class VeiculoDB {
         
         return false;
         
-    }
-    
-    public boolean excluir (Veiculo v) {
-        boolean ok;
-        
-        try {
-            this.conn = conexao.conectar();
-            ps = conn.prepareStatement("delete from veiculo where idVeiculo=?;");
-            ps.setInt(1, v.getIdVeiculo());
-            ps.executeUpdate();
-            
-            ok = true;
-        } catch(Exception e) {
-            e.printStackTrace();
-            
-            ok = false;
-        } finally {
-            conexao.desconectar();
-        }
-        
-        if(ok)
-            return true;
-        return false;
     }
     
     public boolean ativarVeicculo(Veiculo v) {

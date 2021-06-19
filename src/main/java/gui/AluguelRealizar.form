@@ -235,7 +235,7 @@
             </Container>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="CodCliente:"/>
+                <Property name="text" type="java.lang.String" value="Cod Cliente:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
@@ -470,7 +470,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="CodVeiculos:"/>
+                <Property name="text" type="java.lang.String" value="Cod Veiculos:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">

@@ -23,46 +23,7 @@ public class ClienteDB {
     
     
 //    public ArrayList<Cliente> findAll() {
-    public ArrayList<Cliente> readAll() {
-        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-        
-        try {
-            this.conn = conexao.conectar();
-            ps = conn.prepareStatement("select * from cliente");
-            rs = ps.executeQuery();
-            
-            ArrayList<Cliente> lista = new ArrayList<Cliente>();
-            
-            
-            
-//            String cliente = rs.getString("Nome");
-//            System.out.println(cliente);
-            
-            while(rs.next()) {
-                Cliente c = new Cliente();
-                c.setIdCliente(rs.getInt("idCliente"));
-                c.setNome(rs.getString("Nome"));
-                c.setCPF(rs.getString("CPF"));
-                c.setEndereco(rs.getString("Endereco"));
-                c.setTelefone(rs.getString("Telefone"));
-                c.setEmail(rs.getString("Email"));
-                c.setCNH(rs.getString("CNH"));
-                c.setIsActive(rs.getBoolean("IsActive"));
-
-                lista.add(c);
-                
-            }
-            ps.close();
-            return lista;
-            
-        } catch(Exception e) {
-            e.printStackTrace();
-        } finally {
-            conexao.desconectar();
-        }
-        
-        return null;
-    }
+    
     
     public ArrayList<Cliente> listarClientesAtivos() {
         ArrayList<Cliente> clientes = new ArrayList<Cliente>();

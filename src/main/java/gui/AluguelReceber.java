@@ -36,7 +36,13 @@ public class AluguelReceber extends javax.swing.JFrame {
     public AluguelReceber() {
         initComponents();
         carregaTabelaAtivos();
+        
+        System.out.println(total);
+        
     }
+    
+    private float total;
+    private String valor1;
     
     private void carregaTabelaAtivos(){
         
@@ -79,60 +85,14 @@ public class AluguelReceber extends javax.swing.JFrame {
                     a.getTelefone(),
                     a.getModelo(),
                     a.getPlaca(),
-                    a.getAno()
-//                    a.getIsActive()
-                
-                });
-            }
-        }
-
-    }
-    
-    private void carregaTabelaInativos(){
-        
-        DefaultTableModel modelo = (DefaultTableModel) tbAlugueis.getModel();
-        modelo.setNumRows(0);
-       
-        DefaultTableCellRenderer esquerda = new DefaultTableCellRenderer();
-        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
-        DefaultTableCellRenderer direita = new DefaultTableCellRenderer();
-        
-        esquerda.setHorizontalAlignment(SwingConstants.LEFT);
-        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
-        direita.setHorizontalAlignment(SwingConstants.RIGHT);
-        
-        
-        tbAlugueis.getColumnModel().getColumn(0).setCellRenderer(centralizado);
-        tbAlugueis.getColumnModel().getColumn(1).setCellRenderer(centralizado);
-        tbAlugueis.getColumnModel().getColumn(2).setCellRenderer(centralizado);
-        tbAlugueis.getColumnModel().getColumn(3).setCellRenderer(centralizado);
-        tbAlugueis.getColumnModel().getColumn(4).setCellRenderer(centralizado);
-        tbAlugueis.getColumnModel().getColumn(5).setCellRenderer(centralizado);
-        tbAlugueis.getColumnModel().getColumn(6).setCellRenderer(centralizado);
-        tbAlugueis.getColumnModel().getColumn(7).setCellRenderer(centralizado);
-        tbAlugueis.getColumnModel().getColumn(8).setCellRenderer(centralizado);
-        tbAlugueis.getColumnModel().getColumn(9).setCellRenderer(centralizado);
-        
-        AluguelDB alugueldb = new AluguelDB();
-        ArrayList<Aluguel> alugueis = alugueldb.listarAlugueisInativos();
-        
-        if (alugueis != null){
-            for (Aluguel a : alugueis){
-                modelo.addRow(new Object[]{
-                
-                    a.getIdAluguel(),
-                    a.getDtAluguel(),
-                    a.getValor(),
-                    a.getDtDevolucao(),
-                    a.getNome(),
-                    a.getCPF(),
-                    a.getTelefone(),
-                    a.getModelo(),
-                    a.getPlaca(),
                     a.getAno(),
-                    a.getIsActive()
-                
+//                    a.getIsActive()
+                    this.total = this.total + a.getValor()
+                    
                 });
+                
+                valor1 = String.valueOf(total);
+                this.lbTeste.setText(valor1);
             }
         }
 
@@ -193,6 +153,8 @@ public class AluguelReceber extends javax.swing.JFrame {
         txtIdAluguel = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         btnDesativar = new javax.swing.JButton();
+        lbTeste = new javax.swing.JLabel();
+        lbTeste1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -489,13 +451,22 @@ public class AluguelReceber extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
+        lbTeste.setText("jLabel13");
+
+        lbTeste1.setText("Total a receber:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbTeste1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbTeste))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -503,7 +474,11 @@ public class AluguelReceber extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbTeste)
+                    .addComponent(lbTeste1))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -569,6 +544,11 @@ public class AluguelReceber extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(rootPane, "Veiculo devolvido.");
                     carregaTabelaAtivos();
                     limparCampos();
+                    
+                    Home homeObj = new Home();
+                    homeObj.setVisible(true);
+                    homeObj.setLocationRelativeTo(null);
+                    this.dispose();
 
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Falha");
@@ -647,6 +627,8 @@ public class AluguelReceber extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbTeste;
+    private javax.swing.JLabel lbTeste1;
     private javax.swing.JTable tbAlugueis;
     private javax.swing.JTextField txtAno;
     private javax.swing.JTextField txtCPF;

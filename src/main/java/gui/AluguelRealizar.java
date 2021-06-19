@@ -314,7 +314,7 @@ public class AluguelRealizar extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel1.setText("CodCliente:");
+        jLabel1.setText("Cod Cliente:");
 
         jLabel2.setText("Nome:");
 
@@ -448,7 +448,7 @@ public class AluguelRealizar extends javax.swing.JFrame {
 
         jLabel13.setText("Chassi:");
 
-        jLabel8.setText("CodVeiculos:");
+        jLabel8.setText("Cod Veiculos:");
 
         jLabel11.setText("Placa:");
 

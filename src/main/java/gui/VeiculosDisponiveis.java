@@ -34,6 +34,8 @@ public class VeiculosDisponiveis extends javax.swing.JFrame {
         this.btnLimpar.setEnabled(false);
     }
     
+
+    
     private void habilitarCampos(){
         this.txtAno.setEditable(true);
         this.txtChassi.setEditable(true);
@@ -105,106 +107,6 @@ public class VeiculosDisponiveis extends javax.swing.JFrame {
 
     }
     
-    
-    
-    private void carregaTabelaDisponiveis(){
-        
-        DefaultTableModel modelo = (DefaultTableModel) tbVeiculos.getModel();
-        modelo.setNumRows(0);
-        
-        DefaultTableCellRenderer esquerda = new DefaultTableCellRenderer();
-        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
-        DefaultTableCellRenderer direita = new DefaultTableCellRenderer();
-        
-        esquerda.setHorizontalAlignment(SwingConstants.LEFT);
-        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
-        direita.setHorizontalAlignment(SwingConstants.RIGHT);
-        
-        
-        tbVeiculos.getColumnModel().getColumn(0).setCellRenderer(centralizado);
-        tbVeiculos.getColumnModel().getColumn(1).setCellRenderer(centralizado);
-        tbVeiculos.getColumnModel().getColumn(2).setCellRenderer(centralizado);
-        tbVeiculos.getColumnModel().getColumn(3).setCellRenderer(centralizado);
-        tbVeiculos.getColumnModel().getColumn(4).setCellRenderer(centralizado);
-        tbVeiculos.getColumnModel().getColumn(5).setCellRenderer(centralizado);
-        tbVeiculos.getColumnModel().getColumn(6).setCellRenderer(centralizado);
-        tbVeiculos.getColumnModel().getColumn(7).setCellRenderer(centralizado);
-        
-        VeiculoDB veiculodb = new VeiculoDB();
-        ArrayList<Veiculo> veiculos = veiculodb.listarVeiculosDisponiveis();
-        
-        
-        if (veiculos != null){
-            for (Veiculo v : veiculos){
-                
-                modelo.addRow(new Object[]{
-                    
-                    v.getIdVeiculo(),
-                    v.getModelo(),
-                    v.getCor(),
-                    v.getPlaca(),
-                    v.getDescricao(),
-                    v.getChassi(),
-                    v.getFabricante(),
-                    v.getAno(),
-//                    v.isIsActive(),
-                    v.isDisponibilidade()
-      
-                });
-            }
-        }
-
-    }
-    
-    private void carregaTabelaIndisponiveis(){
-        
-        DefaultTableModel modelo = (DefaultTableModel) tbVeiculos.getModel();
-        modelo.setNumRows(0);
-        
-        DefaultTableCellRenderer esquerda = new DefaultTableCellRenderer();
-        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
-        DefaultTableCellRenderer direita = new DefaultTableCellRenderer();
-        
-        esquerda.setHorizontalAlignment(SwingConstants.LEFT);
-        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
-        direita.setHorizontalAlignment(SwingConstants.RIGHT);
-        
-        
-        tbVeiculos.getColumnModel().getColumn(0).setCellRenderer(centralizado);
-        tbVeiculos.getColumnModel().getColumn(1).setCellRenderer(centralizado);
-        tbVeiculos.getColumnModel().getColumn(2).setCellRenderer(centralizado);
-        tbVeiculos.getColumnModel().getColumn(3).setCellRenderer(centralizado);
-        tbVeiculos.getColumnModel().getColumn(4).setCellRenderer(centralizado);
-        tbVeiculos.getColumnModel().getColumn(5).setCellRenderer(centralizado);
-        tbVeiculos.getColumnModel().getColumn(6).setCellRenderer(centralizado);
-        tbVeiculos.getColumnModel().getColumn(7).setCellRenderer(centralizado);
-        
-        VeiculoDB veiculodb = new VeiculoDB();
-        ArrayList<Veiculo> veiculos = veiculodb.listarVeiculosIndisponiveis();
-        
-        
-        if (veiculos != null){
-            for (Veiculo v : veiculos){
-                
-                modelo.addRow(new Object[]{
-                    
-                    v.getIdVeiculo(),
-                    v.getModelo(),
-                    v.getCor(),
-                    v.getPlaca(),
-                    v.getDescricao(),
-                    v.getChassi(),
-                    v.getFabricante(),
-                    v.getAno()
-//                    v.isIsActive(),
-//                    v.isDisponibilidade()
-      
-                });
-            }
-        }
-
-    }
-    
     private void limparCampos(){
         this.txtCode.setText("");
         this.txtModelo.setText("");
@@ -257,6 +159,7 @@ public class VeiculosDisponiveis extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -351,6 +254,8 @@ public class VeiculosDisponiveis extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setText("jLabel9");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -367,43 +272,48 @@ public class VeiculosDisponiveis extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCor, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                            .addComponent(txtModelo))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtPlaca, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                            .addComponent(txtChassi))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(74, 74, 74)
+                                .addComponent(jLabel9)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCor, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                                    .addComponent(txtModelo))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtPlaca, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                                    .addComponent(txtChassi))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(74, 74, 74)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(BtnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                        .addComponent(txtFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(BtnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -458,7 +368,9 @@ public class VeiculosDisponiveis extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnVoltar)
                             .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(jLabel9)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -474,8 +386,8 @@ public class VeiculosDisponiveis extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -541,7 +453,7 @@ public class VeiculosDisponiveis extends javax.swing.JFrame {
             
             int index = tbVeiculos.getSelectedRow();
             
-            v = vdb.readAll().get(index);
+            v = vdb.listarVeiculosDisponiveis().get(index);
             
             v.setModelo(txtModelo.getText());
             v.setCor(txtCor.getText());
@@ -629,6 +541,7 @@ public class VeiculosDisponiveis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbVeiculos;
