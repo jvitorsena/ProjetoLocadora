@@ -15,6 +15,7 @@ import models.Cliente;
  *
  * @author amaury
  */
+
 public class ClienteDB {
     private Connection conn;
     private Conexao conexao = new Conexao();
@@ -192,34 +193,6 @@ public class ClienteDB {
         
         return false;
 
-    }
-    
-    public boolean excluir(Cliente c){ 
-        boolean ok;
-        
-        try {
-            this.conn = conexao.conectar();
-            ps = conn.prepareStatement("delete from cliente where idCliente=?;");
-            ps.setInt(1, c.getIdCliente());
-            ps.executeUpdate();
-            
-            
-            ok = true;
-        } catch(Exception e) {
-            e.printStackTrace();
-            
-            ok = false;
-        } finally {
-            conexao.desconectar();
-        }
-        
-        if(ok) 
-            return true;
-        
-        return false;
-        
-        
-        
     }
     
     public boolean ativarCliente(Cliente c) {

@@ -10,9 +10,7 @@ import dao.ClienteDB;
 import dao.VeiculoDB;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
@@ -785,9 +783,17 @@ public class AluguelRealizar extends javax.swing.JFrame {
                 
                 AluguelDB adb = new AluguelDB();
                 
+                System.out.println(txtValor.getText());
+                
+                if (txtValor.getText().substring(0, 1).matches("[a-z]*")){
+                    JOptionPane.showMessageDialog(rootPane, "Verifique o campo valor");
+                }
+
+                
                 int IdVeiculo = Integer.parseInt(txtIdVeiculo.getText());
                 int IdCliente = Integer.parseInt(txtIdCliente.getText());
                 float Valor = Float.parseFloat(txtValor.getText());
+                
                 
                 v.setIdVeiculo(IdVeiculo);
                 c.setIdCliente(IdCliente);

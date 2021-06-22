@@ -251,6 +251,7 @@ public class AluguelDB {
             ps.setString(5, a.getDtAluguel());
             ps.executeUpdate();
             
+            
             ps = conn.prepareStatement("update veiculo set veiculo.Disponibilidade=0 where veiculo.idVeiculo=?;");
             ps.setInt(1, v.getIdVeiculo());
             ps.executeUpdate();
@@ -259,6 +260,7 @@ public class AluguelDB {
             
         } catch (Exception e){
             e.printStackTrace();
+            System.out.println("Erro!");
             ok = false;
         } finally {
             conexao.desconectar();

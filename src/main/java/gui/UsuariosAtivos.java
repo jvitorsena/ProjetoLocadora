@@ -156,7 +156,11 @@ public class UsuariosAtivos extends javax.swing.JFrame {
             }
         });
 
+        txtIdUsuario.setEditable(false);
+
         jLabel2.setText("Usuario:");
+
+        txtUsuario.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
